@@ -3,6 +3,7 @@ package com.example.chatapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chatapp.Common.Internet;
+import com.example.chatapp.Login.LoginActivity;
 import com.example.chatapp.R;
 
 public class MessageActivity extends AppCompatActivity {
@@ -76,6 +78,12 @@ public class MessageActivity extends AppCompatActivity {
     public void btnClose(View V)
     {
         finishAffinity();
+    }
+
+    public void playGame(View V) {
+
+        startActivity(new Intent(MessageActivity.this, GameActivity.class));
+
     }
 
 

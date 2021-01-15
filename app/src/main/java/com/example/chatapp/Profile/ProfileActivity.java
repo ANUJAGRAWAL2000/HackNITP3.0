@@ -6,14 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -29,6 +33,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -46,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextInputEditText etName,etEmail;
     private String Email,Name;
+    private String Password;
 
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
@@ -305,6 +312,64 @@ public class ProfileActivity extends AppCompatActivity {
     public void changePassword(View view)
     {
         startActivity(new Intent(ProfileActivity.this, changePasswordActivity.class));
+    }
+
+    public void deleteAcc(View view) {
+
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Do you want to delete your account?")
+                .setMessage("Your account will be delete forever!!!")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                        builder.setTitle("Enter your Password");
+
+                        final EditText input = new EditText(ProfileActivity.this);
+                        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        builder.setView(input);
+
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                Password = input.getText().toString();
+
+                                final String email = firebaseUser.getEmail();
+                                AuthCredential credential = EmailAuthProvider.getCredential(email, Password);
+
+                                firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            user.delete()
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                startActivity(new Intent(ProfileActivity.this, SignUpActivity.class));
+                                                            }
+                                                        }
+                                                    });
+                                        } else {
+
+                                            Toast.makeText(ProfileActivity.this, "Wrong Old Password!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", null);
+
+                        builder.show();
+
+                    }
+                })
+                .setNegativeButton("Cancel",null).show();
+
+
     }
 
     @Override

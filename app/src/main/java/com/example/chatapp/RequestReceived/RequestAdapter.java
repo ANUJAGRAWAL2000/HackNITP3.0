@@ -72,8 +72,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             public void onSuccess(Uri uri) {
                 Glide.with(context)
                         .load(uri)
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile)
+                        .placeholder(R.drawable.ic_user_2)
+                        .error(R.drawable.ic_user_2)
                         .into(holder.Profile);
             }
         });

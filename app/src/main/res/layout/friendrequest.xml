@@ -18,12 +18,13 @@
         <ImageView
             android:id="@+id/ImageFriend"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@color/white"
             android:padding="4dp"
-            android:src="@drawable/ic_user" />
+            android:src="@drawable/ic_user_2"
+            android:contentDescription="TODO" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +39,7 @@
                 android:id="@+id/Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="serif"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:text="UserName" />
@@ -47,9 +49,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:fontFamily="serif"
                 android:text="@string/sentFriendRequest"
                 android:textSize="12sp"
-                app:backgroundTint="@android:color/holo_green_light" />
+                app:backgroundTint="@android:color/holo_green_light"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/CancelRequest"
@@ -58,7 +62,8 @@
                 android:text="@string/cancelRequest"
                 android:textSize="12sp"
                 android:visibility="gone"
-                app:backgroundTint="@android:color/holo_green_dark" />
+                app:backgroundTint="@android:color/holo_green_dark"
+                app:cornerRadius="20dp" />
 
             <ProgressBar
                 android:id="@+id/pvFriendRequest"

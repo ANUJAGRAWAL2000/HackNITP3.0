@@ -4,66 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/selectedViewBackground"
     tools:context=".Chat.SendActivity">
 
     <LinearLayout
+        android:id="@+id/llProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llProgress"
         android:background="@color/white"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.cardview.widget.CardView
+        android:id="Cardll2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/etMessage"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:autofillHints=""
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="@color/black"
-            tools:text="Enter Message" />
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/ivFile"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="TODO"
-            android:tint="@color/gray"
-            app:srcCompat="@drawable/ic_baseline_attachment_24" />
 
-        <ImageView
-            android:id="@+id/ivSend"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:tint="@color/gray"
-            app:srcCompat="@drawable/ic_baseline_send_24" />
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                tools:text="Enter Message" />
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/ivFile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="TODO"
+                android:src="@drawable/ic_baseline_attachment_24"
+                android:tint="@color/gray" />
+
+            <ImageView
+                android:id="@+id/ivSend"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_baseline_send_24"
+                android:tint="@color/gray" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlMessage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/Cardll2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llProgress">

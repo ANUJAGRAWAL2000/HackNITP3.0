@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clMessage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llSentMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/sent_message_background"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvSentMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textColorLink="@color/linkColor"
+            tools:text="How are You Doing?" />
+
+        <TextView
+            android:id="@+id/tvSentMessageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="bottom"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="09:00" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSentImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/sent_message_background"
+        android:orientation="vertical"
+        android:padding="4dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llSentMessage"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivSent"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_baseline_image_24"></ImageView>
+
+        <TextView
+            android:id="@+id/tvSentImageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="bottom"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:text="09:00"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llReceivedMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/received_message_background"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llSentMessage"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvReceivedMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:padding="12dp"
+            android:textColor="@color/navy"
+            android:textColorLink="@color/linkColor"
+            tools:text="How are You Doing?" />
+
+        <TextView
+            android:id="@+id/tvReceivedMessageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:gravity="bottom"
+            android:textColor="@color/navy"
+            android:textSize="12sp"
+            tools:text="09:00" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llReceivedImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/received_message_background"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llReceivedMessage"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivReceived"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_baseline_image_24"></ImageView>
+
+        <TextView
+            android:id="@+id/tvReceivedImageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="bottom"
+            android:textColor="@color/navy"
+            android:textSize="12sp"
+            tools:text="09:00"></TextView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

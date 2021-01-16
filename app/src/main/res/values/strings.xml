@@ -5,6 +5,7 @@
     <string name="ResetPassword">Reset Password</string>
     <string name="CorrectEmail">Enter Correct Email</string>
     <string name="Login">Login</string>
+    <string name="Play">Play Game</string>
     <string name="PasswordMismatch">password Mismatch</string>
     <string name="etEmail">Enter Email</string>
     <string name="etOldPassword">Enter Old Password</string>

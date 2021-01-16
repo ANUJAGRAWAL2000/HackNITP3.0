@@ -6,6 +6,7 @@
     <string name="ResetPassword">पासवर्ड रीसेट</string>
     <string name="CorrectEmail">सही ईमेल दर्ज करें</string>
     <string name="Login">लॉग इन करें</string>
+    <string name="Play">गेम खेलें</string>
     <string name="PasswordMismatch">पासवर्ड का मेल नहीं हुआ</string>
     <string name="etEmail">ईमेल दर्ज करें</string>
     <string name="etOldPassword">पुराना पास वर्ड दर्ज करें</string>

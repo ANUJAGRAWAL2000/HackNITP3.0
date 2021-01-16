@@ -87,10 +87,16 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else
                             {
+                                progressBar.setVisibility(View.GONE);
+                                loginCardView.setVisibility(View.VISIBLE);
+                                signUpLayout.setVisibility(View.VISIBLE);
                                 Toast.makeText(LoginActivity.this,"Please Verify ur Email Id",Toast.LENGTH_SHORT).show();
                             }
-                        } else
-                            {
+                        }
+                        else {
+                            progressBar.setVisibility(View.GONE);
+                            loginCardView.setVisibility(View.VISIBLE);
+                            signUpLayout.setVisibility(View.VISIBLE);
                             Toast.makeText(LoginActivity.this, "Login Failed:" + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }

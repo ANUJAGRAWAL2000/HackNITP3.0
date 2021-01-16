@@ -59,13 +59,14 @@ public class FindFriendAdapter extends RecyclerView.Adapter<FindFriendAdapter.Fi
         holder.UserName.setText(findFriend.getUserName());
 
         StorageReference fileRef= FirebaseStorage.getInstance().getReference().child("Images/"+findFriend.getPhotoName());
+
         fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context)
                         .load(uri)
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile)
+                        .placeholder(R.drawable.ic_user_2)
+                        .error(R.drawable.ic_user_2)
                         .into(holder.ivProfile);
             }
         });
@@ -209,8 +210,6 @@ public class FindFriendAdapter extends RecyclerView.Adapter<FindFriendAdapter.Fi
             requestSent=itemView.findViewById(R.id.FriendRequest);
             cancelRequest=itemView.findViewById(R.id.CancelRequest);
             frprogress=itemView.findViewById(R.id.pvFriendRequest);
-
-
         }
     }
 }

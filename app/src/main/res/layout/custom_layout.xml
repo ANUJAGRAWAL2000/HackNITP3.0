@@ -5,46 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/ivCustom"
         android:layout_width="42dp"
         android:layout_height="42dp"
-        app:srcCompat="@drawable/ic_user" />
+        android:src="@drawable/ic_user_2" />
 
     <LinearLayout
         android:id="@+id/llAction"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvCustom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_weight="1"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        tools:text="UserName" />
+        <TextView
+            android:id="@+id/tvCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:fontFamily="serif"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="UserName" />
 
         <TextView
             android:id="@+id/tvStatus"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:fontFamily="serif"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/white" />
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>

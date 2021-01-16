@@ -37,7 +37,7 @@
     <string name="emptyChatList">Chat List Will Appear Here</string>
     <string name="emptyFriendList">Friend List will Appear Here</string>
     <string name="emptyRequestList">Request List will Appear Here</string>
-    <string name="sentFriendRequest">Sent Friend Request</string>
+    <string name="sentFriendRequest">Send Friend Request</string>
     <string name="cancelRequest">Cancel Request</string>
     <string name="Accept">Accept</string>
     <string name="Deny">Deny</string>

@@ -16,6 +16,7 @@ public class Node {
     public static final String Request_Type="request_type";
 
     public static final String TIME_STAMP="timestamp";
+    public static final String HIDE="hide";
     public static final String Unread_Count="unread_count";
     public static final String Last_Message="last_message";
     public static final String Last_Message_Time="last_message_time";

@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_user"
         android:title="@string/Profile"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_unHide"
+        android:icon="@drawable/ic_unhide"
+        android:title="@string/UnHide"
+        app:showAsAction="always" />
 </menu>

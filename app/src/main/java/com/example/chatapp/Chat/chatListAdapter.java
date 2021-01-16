@@ -23,8 +23,13 @@ import com.bumptech.glide.Glide;
 import com.example.chatapp.Common.Constants;
 import com.example.chatapp.Common.Extras;
 import com.example.chatapp.Common.Internet;
+import com.example.chatapp.Common.Node;
 import com.example.chatapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -35,6 +40,9 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
     private Context context;
     private List<ChatListModel> chatListModelList;
     private View ChatToHide;
+    private DatabaseReference databaseReferenceChats;
+    private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
 
     public chatListAdapter(Context context, List<ChatListModel> chatListModelList) {
         this.context = context;
@@ -103,8 +111,8 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
         holder.llChatList.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Constants.HIDE_VALUE = true;
-                view.setVisibility(View.GONE);
+                databaseReferenceChats.child(firebaseUser.getUid()).child(chatListModel.getUserId()).child(Node.HIDE).setValue(Constants.TRUE);
+//                view.setVisibility(View.GONE);
                 return true;
             }
         });
@@ -132,7 +140,9 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
             tvUnReadCount=itemView.findViewById(R.id.tvUnreadCount);
             tvLastMessageTime=itemView.findViewById(R.id.tvLastMessageTime);
             ivProfile=itemView.findViewById(R.id.ivProfile);
-
+            databaseReferenceChats= FirebaseDatabase.getInstance().getReference().child(Node.Chats);
+            mAuth=FirebaseAuth.getInstance();
+            firebaseUser=mAuth.getCurrentUser();
         }
     }
 }

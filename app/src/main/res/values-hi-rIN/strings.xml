@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">चैट एप्लिकेशन</string>
+    <string name="etName">नाम दर्ज</string>
+    <string name="etPassword">पास वर्ड दर्ज करें</string>
+    <string name="ResetPassword">पासवर्ड रीसेट</string>
+    <string name="CorrectEmail">सही ईमेल दर्ज करें</string>
+    <string name="Login">लॉग इन करें</string>
+    <string name="PasswordMismatch">पासवर्ड का मेल नहीं हुआ</string>
+    <string name="etEmail">ईमेल दर्ज करें</string>
+    <string name="etOldPassword">पुराना पास वर्ड दर्ज करें</string>
+    <string name="etConfPassword">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="SignUp">साइन अप करें</string>
+    <string name="Fullname">पूरा नाम</string>
+    <string name="DonthaveAccount">खाता नहीं है?</string>
+    <string name="todo">करने के लिए</string>
+    <string name="Save">सहेजें</string>
+    <string name="changePassword">पासवर्ड बदलें</string>
+    <string name="changePicture">चित्र बदलो</string>
+    <string name="removePicture">चित्र हटा दें</string>
+    <string name="Logout">लॉग आउट</string>
+    <string name="Profile">प्रोफ़ाइल</string>
+    <string name="Resend">पुन: भेजें in %1$s </string>
+    <string name="resetPassword">पासवर्ड रीसेट</string>
+    <string name="resetLink">रीसेट लिंक निर्देश ईमेल पर भेजा गया है : %1$s </string>
+    <string name="Retry">पुन: प्रयास करें</string>
+    <string name="Close">बंद करे</string>
+    <string name="PleaseWait">कृपया प्रतीक्षा करें...</string>
+    <string name="InternetConnection">इंटरनेट कनेक्शन की जाँच करें</string>
+    <string name="no_internet">इंटरनेट नहीं है</string>
+    <string name="close">बंद करे</string>
+    <string name="ChatApp">चैट एप्लिकेशन</string>
+    <string name="chat">चैट</string>
+    <string name="request">अनुरोध</string>
+    <string name="Find">खोज</string>
+
+    <string name="hello_blank_fragment">हैलो खाली टुकड़ा</string>
+    <string name="emptyChatList">यहां चैट लिस्ट दिखाई देगी</string>
+    <string name="emptyFriendList">फ्रेंड लिस्ट यहां दिखाई देगी</string>
+    <string name="emptyRequestList">अनुरोध सूची यहां दिखाई देगी</string>
+    <string name="sentFriendRequest">भेजा गया फ्रेंड रिक्वेस्ट</string>
+    <string name="cancelRequest">निवेदन अस्विकार</string>
+    <string name="Accept">स्वीकार करना</string>
+    <string name="Deny">मना</string>
+    <string name="LastMessage">अंतिम संदेश</string>
+    <string name="camera">कैमरा</string>
+    <string name="video">वीडियो</string>
+    <string name="gallery">गेलरी</string>
+    <string name="tvFileProgress">अपलोडिंग  %1$s  (%2$s  %%)</string>
+    <string name="tvDownloadProgress">डाउनलोडिंग %1$s  (%2$s  %%)</string>
+    <string name="Forward">आगे</string>
+    <string name="Delete">हटाएं</string>
+    <string name="Share">शेयर</string>
+    <string name="Download">डाउनलोड</string>
+    <string name="view">देखिये</string>
+</resources>

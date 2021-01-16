@@ -1,6 +1,9 @@
 package com.example.chatapp.Chat;
 
+import android.app.AlertDialog;
+import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -9,12 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.chatapp.Common.Constants;
 import com.example.chatapp.Common.Extras;
 import com.example.chatapp.Common.Internet;
 import com.example.chatapp.R;
@@ -28,6 +34,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
 
     private Context context;
     private List<ChatListModel> chatListModelList;
+    private View ChatToHide;
 
     public chatListAdapter(Context context, List<ChatListModel> chatListModelList) {
         this.context = context;
@@ -88,6 +95,17 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
                 I.putExtra(Extras.UserName,chatListModel.getUserName());
                 I.putExtra(Extras.PhotoName,chatListModel.getPhotoName());
                 context.startActivity(I);
+            }
+        });
+
+        //TODO
+
+        holder.llChatList.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Constants.HIDE_VALUE = true;
+                view.setVisibility(View.GONE);
+                return true;
             }
         });
 

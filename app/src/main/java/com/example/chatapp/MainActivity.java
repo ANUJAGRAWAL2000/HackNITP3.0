@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabmain;
@@ -145,14 +147,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 //            finish();
         }
-//        else if(Id==R.id.menu_unHide)
-//        {
+        else if(Id==R.id.menu_unHide)
+        {
 //            databaseReferenceChats.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
 //                @Override
 //                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    ArrayList<String> UID=new ArrayList<>();
 //                    for(DataSnapshot ds:dataSnapshot.getChildren())
 //                    {
-//                            ds.child(Node.HIDE).
+//                            String Uid=ds.getValue().toString();
+//                            UID.add(Uid);
+//                    }
+//                    for(String Uid:UID)
+//                    {
+//                        databaseReferenceChats.child(firebaseUser.getUid()).child(Uid).setValue(false);
 //                    }
 //                }
 //
@@ -161,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //                }
 //            });
-//        }
+
+        }
         return super.onOptionsItemSelected(item);
     }
 

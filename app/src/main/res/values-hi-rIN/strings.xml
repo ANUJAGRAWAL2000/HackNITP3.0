@@ -55,4 +55,10 @@
     <string name="Share">शेयर</string>
     <string name="Download">डाउनलोड</string>
     <string name="view">देखिये</string>
+    <string name="UnHide">चैट दिखाएं</string>
+    <string name="EditText">टेक्स्ट बदलें</string>
+    <string name="Call">कॉल</string>
+    <string name="Hide">छिपाएं</string>
+    <string name="ReadNews">समाचार पढ़ें</string>
+
 </resources>

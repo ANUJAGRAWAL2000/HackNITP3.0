@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Aplicación de chat</string>
+    <string name="etName">Ingrese su nombre</string>
+    <string name="etPassword">Introducir la contraseña</string>
+    <string name="ResetPassword">Restablecer la contraseña</string>
+    <string name="CorrectEmail">Ingrese el correo electrónico correcto</string>
+    <string name="Login">Iniciar sesión</string>
+    <string name="Play">Jugar un juego</string>
+    <string name="DeleteAcc">Borrar cuenta</string>
+    <string name="PasswordMismatch">Contraseña no coincide</string>
+    <string name="etEmail">Ingrese correo electrónico</string>
+    <string name="etOldPassword">Ingrese la contraseña anterior</string>
+    <string name="etConfPassword">Confirmar contraseña</string>
+    <string name="SignUp">Regístrate</string>
+    <string name="Fullname">Nombre completo</string>
+    <string name="DonthaveAccount">¿No tienes una cuenta?</string>
+    <string name="todo">QUE HACER</string>
+    <string name="Save">Salvar</string>
+    <string name="changePassword">Cambia la contraseña</string>
+    <string name="changePicture">Cambiar imagen</string>
+    <string name="removePicture">Quitar imagen</string>
+    <string name="Logout">Cerrar sesión</string>
+    <string name="Profile">Perfil</string>
+    <string name="Resend">Reenviar en %1$s </string>
+    <string name="resetPassword">Restablecer la contraseña</string>
+    <string name="resetLink">Se han enviado instrucciones de restablecimiento de enlace al correo electrónico : %1$s </string>
+    <string name="Retry">Rever</string>
+    <string name="Close">Cerca</string>
+    <string name="PleaseWait">Por favor espera...</string>
+    <string name="InternetConnection">Compruebe la conexión a Internet</string>
+    <string name="no_internet">Sin internet</string>
+    <string name="close">Cerca</string>
+    <string name="ChatApp">Aplicación de chat</string>
+    <string name="chat">Chat</string>
+    <string name="request">Peticiones</string>
+    <string name="Find">Encontrar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="emptyChatList">La lista de chat aparecerá aquí</string>
+    <string name="emptyFriendList">La lista de amigos aparecerá aquí</string>
+    <string name="emptyRequestList">La lista de solicitudes aparecerá aquí</string>
+    <string name="sentFriendRequest">Envia solicitud de amistad</string>
+    <string name="cancelRequest">Cancelar petición</string>
+    <string name="Accept">Aceptar</string>
+    <string name="Deny">Negar</string>
+    <string name="LastMessage">Ultimo mensaje</string>
+    <string name="camera">Cámara</string>
+    <string name="video">Vídeo</string>
+    <string name="gallery">Galería</string>
+    <string name="tvFileProgress">Subiendo %1$s  (%2$s  %%)</string>
+    <string name="tvDownloadProgress">Descargando %1$s  (%2$s  %%)</string>
+    <string name="Forward">Adelante</string>
+    <string name="Delete">Eliminar</string>
+    <string name="Share">Compartir</string>
+    <string name="Download">Descargar</string>
+    <string name="view">Ver</string>
+    <string name="UnHide">Mostrar chats</string>
+    <string name="EditText">Editar texto</string>
+    <string name="Call">Llamada</string>
+    <string name="Hide">Esconder</string>
+    <string name="ReadNews">Leer noticias</string>
+
+</resources>

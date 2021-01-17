@@ -66,17 +66,19 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
 
         holder.tvFullName.setText(request.getUserName());
 
-        StorageReference fileRef= FirebaseStorage.getInstance().getReference().child("Images/"+request.getPhotoName());
-        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context)
-                        .load(uri)
-                        .placeholder(R.drawable.ic_user_2)
-                        .error(R.drawable.ic_user_2)
-                        .into(holder.Profile);
-            }
-        });
+        if(!FirebaseDatabase.getInstance().getReference().child(Node.Users).child(request.getUserId()).child(Node.Photo).equals("")) {
+            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("Images/" + request.getUserId() + ".jpg");
+            fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context)
+                            .load(uri)
+                            .placeholder(R.drawable.ic_profile)
+                            .error(R.drawable.ic_profile)
+                            .into(holder.Profile);
+                }
+            });
+        }
 
         databaseReferenceFriendRequest= FirebaseDatabase.getInstance().getReference().child(Node.Friend_Requests);
 

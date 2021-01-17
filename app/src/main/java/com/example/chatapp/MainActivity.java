@@ -9,11 +9,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.chatapp.Chat.ChatFragment;
+import com.example.chatapp.Chat.ChatListModel;
+import com.example.chatapp.Common.Constants;
 import com.example.chatapp.Common.Node;
 import com.example.chatapp.FriendRequest.FriendListFragment;
 import com.example.chatapp.Profile.ProfileActivity;
@@ -141,37 +144,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int Id=item.getItemId();
-        if(Id==R.id.menu_profile)
-        {
-            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-//            finish();
-        }
-        else if(Id==R.id.menu_unHide)
-        {
-//            databaseReferenceChats.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    ArrayList<String> UID=new ArrayList<>();
-//                    for(DataSnapshot ds:dataSnapshot.getChildren())
-//                    {
-//                            String Uid=ds.getValue().toString();
-//                            UID.add(Uid);
-//                    }
-//                    for(String Uid:UID)
-//                    {
-//                        databaseReferenceChats.child(firebaseUser.getUid()).child(Uid).setValue(false);
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
+        switch (item.getItemId()) {
+            case R.id.menu_profile:
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                return true;
+            case R.id.menu_unHide:
+                Log.i("UNHIDE", "HI");
+                databaseReferenceChats = FirebaseDatabase.getInstance().getReference().child(Node.Chats).child(firebaseUser.getUid());
+                databaseReferenceChats.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            String UserID = ds.getKey();
+                            Log.i("ID", UserID);
+                            databaseReferenceChats.child(UserID).child(Node.HIDE).setValue(Constants.FALSE);
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private boolean doubleBackPress=false;

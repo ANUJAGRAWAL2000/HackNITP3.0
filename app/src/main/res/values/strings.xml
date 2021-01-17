@@ -54,8 +54,10 @@
     <string name="Share">Share</string>
     <string name="Download">Download</string>
     <string name="view">View</string>
-    <string name="UnHide">UnHide All</string>
-    <string name="EditText">EditText</string>
+    <string name="UnHide">UnHide Chats</string>
+    <string name="EditText">Edit Text</string>
     <string name="Call">Call</string>
     <string name="Hide">Hide</string>
+    <string name="ReadNews">Read News</string>
+
 </resources>

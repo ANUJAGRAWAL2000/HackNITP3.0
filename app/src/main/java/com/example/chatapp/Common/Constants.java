@@ -6,6 +6,7 @@ public class Constants {
     public static final String MESSAGE_IMAGE="message_Images";
     public static final String MESSAGE_VIDEO="message_Videos";
     public static final String TRUE="true";
+    public static final String FALSE="false";
 
     public static final String MESSAGE_TYPE_TEXT="text";
     public static final String MESSAGE_TYPE_IMAGE="image";

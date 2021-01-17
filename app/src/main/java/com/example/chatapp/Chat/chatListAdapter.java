@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,17 +84,19 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
 
         holder.fullName.setText(chatListModel.getUserName());
 
-        StorageReference fileRef= FirebaseStorage.getInstance().getReference().child("Images/"+chatListModel.getPhotoName());
-        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context)
-                        .load(uri)
-                        .placeholder(R.drawable.ic_profile)
-                        .error(R.drawable.ic_profile)
-                        .into(holder.ivProfile);
-            }
-        });
+        if(!FirebaseDatabase.getInstance().getReference().child(Node.Users).child(chatListModel.getUserId()).child(Node.Photo).equals("")) {
+            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("Images/" + chatListModel.getUserId() + ".jpg");
+            fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context)
+                            .load(uri)
+                            .placeholder(R.drawable.ic_profile)
+                            .error(R.drawable.ic_profile)
+                            .into(holder.ivProfile);
+                }
+            });
+        }
 
         holder.llChatList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,12 +114,13 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
         holder.llChatList.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                databaseReferenceChats.child(firebaseUser.getUid()).child(chatListModel.getUserId()).child(Node.HIDE).setValue(Constants.TRUE);
-//                view.setVisibility(View.GONE);
+                databaseReferenceChats= FirebaseDatabase.getInstance().getReference().child(Node.Chats);
+                mAuth=FirebaseAuth.getInstance();
+                firebaseUser=mAuth.getCurrentUser();
+                databaseReferenceChats.child(firebaseUser.getUid()).child(chatListModel.getUserId()).child(Node.HIDE).setValue("true");
                 return true;
             }
         });
-
     }
 
     @Override
@@ -126,14 +130,11 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
 
 
     public class ChatListViewHolder extends RecyclerView.ViewHolder{
-
         private LinearLayout llChatList;
         private TextView fullName,tvLastMessage,tvUnReadCount,tvLastMessageTime;
         private ImageView ivProfile;
-
         public ChatListViewHolder(@NonNull View itemView) {
             super(itemView);
-
             llChatList=itemView.findViewById(R.id.llChatList);
             fullName=itemView.findViewById(R.id.tvFullName);
             tvLastMessage=itemView.findViewById(R.id.tvLastMessage);

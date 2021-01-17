@@ -139,18 +139,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         holder.clMessage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
                 //It means that action mode is already instantiate
                 if(actionMode!=null)
                 return false;
 
                 selectedView=holder.clMessage;
-
                 actionMode=((AppCompatActivity)context).startSupportActionMode(actionModeCallBack);
-
                 //It will also change the color of Action Mode So we will define the color for actionmode in theme.xml File
                 holder.clMessage.setBackgroundColor(context.getResources().getColor(R.color.teal_700));
-
                 return true;
 
             }

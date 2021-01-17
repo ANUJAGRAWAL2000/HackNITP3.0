@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chatapp.Common.Constants;
 import com.example.chatapp.Common.Node;
 import com.example.chatapp.MainActivity;
 import com.example.chatapp.Profile.ProfileActivity;
@@ -186,9 +188,9 @@ public class ChatFragment extends Fragment {
 
         unreadCount=dataSnapshot.child(Node.Unread_Count).getValue()==null?"0":dataSnapshot.child(Node.Unread_Count).getValue().toString();
 
-                Hide=dataSnapshot.child(Node.HIDE).getValue()!=null?dataSnapshot.child(Node.HIDE).getValue().toString():"false";
+                Hide=dataSnapshot.child(Node.HIDE).getValue()!=null?dataSnapshot.child(Node.HIDE).getValue().toString():Constants.FALSE;
 
-                if(Hide=="false") {
+                if(Hide.equals(Constants.FALSE)) {
                     databaseReferenceUsers.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -206,6 +208,7 @@ public class ChatFragment extends Fragment {
 
                                 //so we will get the Index of that user which is Sending Messages
                                 int IndexOfClickedUser = userIds.indexOf(userId);
+                                if(IndexOfClickedUser>=0)
                                 chatModelList.set(IndexOfClickedUser, chatListModel);
                             }
                             chatAdapter.notifyDataSetChanged();

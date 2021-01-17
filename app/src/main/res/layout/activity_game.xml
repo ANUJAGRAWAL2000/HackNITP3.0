@@ -6,42 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="135dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="178dp"
-        android:layout_marginLeft="178dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="175dp"
-        android:layout_marginRight="175dp"
-        android:text="Yellow won"
-        android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginLeft="161dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="25dp"
         android:layout_marginEnd="162dp"
+        android:layout_marginLeft="161dp"
         android:layout_marginRight="162dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginStart="161dp"
         android:onClick="playAgain"
         android:text="Play Again"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/grid"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.016" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="135dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="175dp"
+        android:layout_marginLeft="178dp"
+        android:layout_marginRight="175dp"
+        android:layout_marginStart="178dp"
+        android:layout_marginTop="36dp"
+        android:text="Yellow won"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        android:gravity="center"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/grid"

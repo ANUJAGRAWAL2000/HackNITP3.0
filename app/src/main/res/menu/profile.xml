@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_profile"
-        android:icon="@drawable/ic_user"
-        android:title="@string/Profile"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/menu_unHide"
         android:icon="@drawable/ic_unhide"
         android:title="@string/UnHide"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_user"
+        android:title="@string/Profile"
+        app:showAsAction="ifRoom" />
 </menu>

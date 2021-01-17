@@ -199,13 +199,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             MenuInflater inflater=mode.getMenuInflater();
             inflater.inflate(R.menu.menu_chat_options,menu);
             //second parameter menu is the parameter passed to OnCreateActionMode
-
             //if the messageType is Text then we will not show download menu
             String messageType=String.valueOf(selectedView.getTag(R.id.TAG_MESSAGE_TYPE));
             if(messageType.equals(Constants.MESSAGE_TYPE_TEXT))
             {
                 MenuItem itemDownload=menu.findItem(R.id.mnuDownload);
                 itemDownload.setVisible(false);
+            }
+            else
+            {
+                MenuItem itemEdit=menu.findItem(R.id.menuEdit);
+                itemEdit.setVisible(false);
             }
             return true;
         }
@@ -262,6 +266,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     }
                     actionMode.finish();
                     break;
+                case R.id.menuEdit:
+                    if(context instanceof SendActivity)
+                    {
+                        ((SendActivity)context).Edit(MessageId);
+                    }
+                    actionMode.finish();
             }
             return false;
         }

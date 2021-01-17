@@ -688,6 +688,21 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    public void Edit(String messageId)
+    {
+        DatabaseReference databaseReference=mRootRef.child(Node.Messages).child(currentUserId).child(chatUserId).child(messageId);
+
+        String CurrentMessage=Message.getText().toString().trim();
+
+        if(databaseReference.child(Node.MessageFrom).getKey()==currentUserId)
+        databaseReference.child(Node.Message).setValue(CurrentMessage);
+        else
+            Toast.makeText(SendActivity.this,"You are not allowed to Edit other's Text",Toast.LENGTH_SHORT).show();
+
+        Message.setText("");
+
+    }
+
     public void Delete(String messageId,String messageType)
     {
         //After this Function Complete we will call Load Message bacause a child is removed.

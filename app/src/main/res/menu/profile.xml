@@ -6,10 +6,13 @@
         android:id="@+id/menu_profile"
         android:icon="@drawable/ic_user"
         android:title="@string/Profile"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/menu_unHide"
         android:icon="@drawable/ic_unhide"
-        android:title="@string/UnHide"
-        app:showAsAction="always" />
+        android:title="@string/UnHide" />
+    <item
+        android:id="@+id/menuCall"
+        android:icon="@drawable/ic_baseline_call_24"
+        android:title="@string/Call" />
 </menu>

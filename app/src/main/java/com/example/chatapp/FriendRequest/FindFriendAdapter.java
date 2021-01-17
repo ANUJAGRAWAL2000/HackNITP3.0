@@ -58,18 +58,19 @@ public class FindFriendAdapter extends RecyclerView.Adapter<FindFriendAdapter.Fi
 
         holder.UserName.setText(findFriend.getUserName());
 
-        StorageReference fileRef= FirebaseStorage.getInstance().getReference().child("Images/"+findFriend.getPhotoName());
-
-        fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context)
-                        .load(uri)
-                        .placeholder(R.drawable.ic_user_2)
-                        .error(R.drawable.ic_user_2)
-                        .into(holder.ivProfile);
-            }
-        });
+        if(!FirebaseDatabase.getInstance().getReference().child(Node.Users).child(findFriend.getUserId()).child(Node.Photo).equals("")) {
+            StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("Images/" + findFriend.getUserId() + ".jpg");
+            fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context)
+                            .load(uri)
+                            .placeholder(R.drawable.ic_profile)
+                            .error(R.drawable.ic_profile)
+                            .into(holder.ivProfile);
+                }
+            });
+        }
 
         friendDatabaseReference= FirebaseDatabase.getInstance().getReference().child(Node.Friend_Requests);
         getCurrentUser= FirebaseAuth.getInstance().getCurrentUser();

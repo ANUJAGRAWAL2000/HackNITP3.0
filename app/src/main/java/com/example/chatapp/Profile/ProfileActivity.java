@@ -390,14 +390,18 @@ public class ProfileActivity extends AppCompatActivity {
             etEmail.setText(firebaseUser.getEmail());
             ServerFileUri=firebaseUser.getPhotoUrl();
 
-            if(ServerFileUri!=null)
-            {
-                Glide.with(this)
-                        .load(ServerFileUri)
-                        .placeholder(R.drawable.ic_user)
-                        .error(R.drawable.ic_user)
-                        .into(ivProfile);
-
+            if(!FirebaseDatabase.getInstance().getReference().child(Node.Users).child(firebaseUser.getUid()).child(Node.Photo).equals("")) {
+                StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("Images/" + firebaseUser.getUid() + ".jpg");
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getApplicationContext())
+                                .load(uri)
+                                .placeholder(R.drawable.ic_profile)
+                                .error(R.drawable.ic_profile)
+                                .into(ivProfile);
+                    }
+                });
             }
         }
     }

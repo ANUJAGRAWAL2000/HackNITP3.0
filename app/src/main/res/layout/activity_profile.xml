@@ -47,6 +47,7 @@
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:hint="@string/etName" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +61,7 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:hint="@string/etEmail" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:onClick="btnSave"
                 android:text="@string/Save"
                 app:backgroundTint="@android:color/holo_orange_dark"
@@ -79,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:gravity="center_horizontal"
                 android:onClick="changePassword"
                 android:text="@string/changePassword"
@@ -92,7 +96,8 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="160dp"
+        android:fontFamily="serif"
         android:onClick="btnLogout"
         android:text="@string/Logout"
         app:backgroundTint="@android:color/holo_orange_dark"
@@ -104,7 +109,7 @@
         android:id="@+id/accountDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="56dp"
         android:onClick="deleteAcc"
         android:text="@string/DeleteAcc"
         app:backgroundTint="@android:color/holo_orange_dark"

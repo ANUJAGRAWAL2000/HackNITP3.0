@@ -5,7 +5,7 @@ public class Constants {
     public static final String IMAGE_FOLDER="Images";
     public static final String MESSAGE_IMAGE="message_Images";
     public static final String MESSAGE_VIDEO="message_Videos";
-    public static boolean HIDE_VALUE=false;
+    public static final String TRUE="true";
 
     public static final String MESSAGE_TYPE_TEXT="text";
     public static final String MESSAGE_TYPE_IMAGE="image";

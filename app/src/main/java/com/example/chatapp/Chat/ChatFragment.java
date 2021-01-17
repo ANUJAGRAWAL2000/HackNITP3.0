@@ -1,5 +1,6 @@
 package com.example.chatapp.Chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -17,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chatapp.Common.Node;
+import com.example.chatapp.MainActivity;
+import com.example.chatapp.Profile.ProfileActivity;
 import com.example.chatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,6 +105,7 @@ public class ChatFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -167,7 +173,7 @@ public class ChatFragment extends Fragment {
         progressBar.setVisibility(View.GONE);
         tvChats.setVisibility(View.GONE);
 
-        final String lastMessage,lastMessageTime,unreadCount;
+        final String lastMessage,lastMessageTime,unreadCount,Hide;
 
         lastMessage=dataSnapshot.child(Node.Last_Message).getValue()!=null?
                 dataSnapshot.child(Node.Last_Message).getValue().toString():
@@ -178,37 +184,38 @@ public class ChatFragment extends Fragment {
                 dataSnapshot.child(Node.Last_Message_Time).getValue().toString():
                 "";
 
-        unreadCount=dataSnapshot.child(Node.Unread_Count).getValue()==null?"0":
-        dataSnapshot.child(Node.Unread_Count).getValue().toString();
+        unreadCount=dataSnapshot.child(Node.Unread_Count).getValue()==null?"0":dataSnapshot.child(Node.Unread_Count).getValue().toString();
 
-        databaseReferenceUsers.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String fullName=dataSnapshot.child(Node.Name).getValue()!=null?dataSnapshot.child(Node.Name).getValue().toString():"";
-                String photoName=dataSnapshot.child(Node.Photo).getValue()!=null?dataSnapshot.child(Node.Photo).getValue().toString():"";
+                Hide=dataSnapshot.child(Node.HIDE).getValue()!=null?dataSnapshot.child(Node.HIDE).getValue().toString():"false";
 
-                ChatListModel chatListModel=new ChatListModel(userId,fullName,photoName,lastMessage,lastMessageTime,unreadCount);
+                if(Hide=="false") {
+                    databaseReferenceUsers.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String fullName = dataSnapshot.child(Node.Name).getValue() != null ? dataSnapshot.child(Node.Name).getValue().toString() : "";
+                            String photoName = dataSnapshot.child(Node.Photo).getValue() != null ? dataSnapshot.child(Node.Photo).getValue().toString() : "";
 
-                if(isNew==true) {
-                    chatModelList.add(chatListModel);
-                    userIds.add(userId);
+                            ChatListModel chatListModel = new ChatListModel(userId, fullName, photoName, lastMessage, lastMessageTime, unreadCount);
+
+                            if (isNew == true) {
+                                chatModelList.add(chatListModel);
+                                userIds.add(userId);
+                            } else {
+                                //if the isNew false then we will update only the chat User which is SendingMessages to us..
+
+
+                                //so we will get the Index of that user which is Sending Messages
+                                int IndexOfClickedUser = userIds.indexOf(userId);
+                                chatModelList.set(IndexOfClickedUser, chatListModel);
+                            }
+                            chatAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(getActivity(), "Failed to Fetch chat List : %1$s" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-                else
-                {
-                    //if the isNew false then we will update only the chat User which is SendingMessages to us..
-
-
-                    //so we will get the Index of that user which is Sending Messages
-                    int IndexOfClickedUser=userIds.indexOf(userId);
-                    chatModelList.set(IndexOfClickedUser,chatListModel);
-                }
-                chatAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity(),"Failed to Fetch chat List : %1$s"+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

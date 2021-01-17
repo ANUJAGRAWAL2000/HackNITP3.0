@@ -20,14 +20,20 @@ import com.example.chatapp.Profile.ProfileActivity;
 import com.example.chatapp.RequestReceived.RequestFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabmain;
     private ViewPager vpmain;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReferenceChats;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         databaseReferenceUsers.child(Node.Online).setValue(true);
 
         databaseReferenceUsers.child(Node.Online).onDisconnect().setValue(false);
+
+        firebaseUser=mAuth.getCurrentUser();
+        databaseReferenceChats=FirebaseDatabase.getInstance().getReference().child(Node.Chats).child(firebaseUser.getUid());
 
         setViewPager();
     }
@@ -136,6 +145,23 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
 //            finish();
         }
+//        else if(Id==R.id.menu_unHide)
+//        {
+//            databaseReferenceChats.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    for(DataSnapshot ds:dataSnapshot.getChildren())
+//                    {
+//                            ds.child(Node.HIDE).
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
         return super.onOptionsItemSelected(item);
     }
 

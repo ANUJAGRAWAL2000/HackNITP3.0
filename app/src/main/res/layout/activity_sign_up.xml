@@ -46,6 +46,7 @@
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:hint="@string/etName" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +59,7 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:hint="@string/etEmail" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,8 +73,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:inputType="textPassword"
-                    android:hint="@string/etPassword" />
+                    android:fontFamily="serif"
+                    android:hint="@string/etPassword"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +89,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
-                    android:inputType="textPassword"
-                    android:hint="@string/etConfPassword" />
+                    android:fontFamily="serif"
+                    android:hint="@string/etConfPassword"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,6 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:onClick="SignUpClk"
                 android:text="@string/SignUp"
                 app:backgroundTint="@android:color/holo_orange_dark" />

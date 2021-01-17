@@ -18,10 +18,10 @@
         <ImageView
             android:id="@+id/ivSelectFriend"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_user" />
+            android:src="@drawable/ic_user_2" />
 
         <TextView
             android:id="@+id/tvSelectFriend"
@@ -30,6 +30,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
+            android:fontFamily="serif"
             android:text="UserName"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />

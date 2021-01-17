@@ -55,6 +55,7 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:hint="@string/etEmail" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,8 +69,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:inputType="textPassword"
-                    android:hint="@string/etPassword" />
+                    android:fontFamily="serif"
+                    android:hint="@string/etPassword"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:onClick="LoginClk"
                 android:text="@string/Login"
                 app:backgroundTint="@android:color/holo_orange_dark" />
@@ -87,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="serif"
                 android:onClick="resetPassword"
                 android:text="@string/ResetPassword"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -115,6 +119,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="32dp"
             android:layout_weight="1"
+            android:fontFamily="serif"
             android:text="@string/DonthaveAccount"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="serif"
             android:onClick="SignUp"
             android:text="@string/SignUp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />

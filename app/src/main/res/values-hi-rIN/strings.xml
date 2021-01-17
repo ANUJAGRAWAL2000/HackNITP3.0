@@ -60,5 +60,6 @@
     <string name="Call">कॉल</string>
     <string name="Hide">छिपाएं</string>
     <string name="ReadNews">समाचार पढ़ें</string>
+    <string name="sendLocation">लोकेशन भेजें</string>
 
 </resources>

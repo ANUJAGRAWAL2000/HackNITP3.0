@@ -15,4 +15,8 @@
         android:id="@+id/menuCall"
         android:icon="@drawable/ic_baseline_call_24"
         android:title="@string/Call" />
+    <item
+        android:id="@+id/menuLocation"
+        android:icon="@drawable/ic_baseline_attachment"
+        android:title="@string/sendLocation" />
 </menu>

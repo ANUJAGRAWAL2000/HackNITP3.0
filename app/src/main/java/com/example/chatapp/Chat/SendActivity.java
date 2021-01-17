@@ -72,7 +72,7 @@ import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 public class SendActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText Message;
-    private ImageView Send,File_Option,ivCustom;
+    private ImageView Send,File_Option,ivCustom,ivDisappearOn,ivDisappearOff;
     private RecyclerView rvMessage;
     private TextView tvCustom,tvStatus;
     private String UserName,PhotoName;
@@ -86,7 +86,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private String currentUserId,chatUserId;
 
     private ChildEventListener childEventListener;
-    private int currentPage=1;
+    private int currentPage=1,isDisappear=0;
     private static final int RECORD_PER_PAGE=30;
 
     private static final int REQUEST_CODE_PICK_IMAGE=101;
@@ -137,6 +137,27 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         tvStatus=findViewById(R.id.tvStatus);
         tvCustom=findViewById(R.id.tvCustom);
         ivCustom=findViewById(R.id.ivCustom);
+        ivDisappearOn=findViewById(R.id.DisappearOn);
+        ivDisappearOff=findViewById(R.id.DisappearOff);
+
+
+        ivDisappearOn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDisappear=1;
+                ivDisappearOn.setVisibility(View.GONE);
+                ivDisappearOff.setVisibility(View.VISIBLE);
+            }
+        });
+
+        ivDisappearOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDisappear=0;
+                ivDisappearOff.setVisibility(View.GONE);
+                ivDisappearOn.setVisibility(View.VISIBLE);
+            }
+        });
 
         if(getIntent().hasExtra(Extras.UserKey))
         {
@@ -415,6 +436,18 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         {
             Toast.makeText(SendActivity.this,"Failed to Send Message : %1$s"+ex.getMessage(),Toast.LENGTH_SHORT).show();
         }
+
+
+        if(isDisappear==1)
+        {
+            new android.os.Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                   Delete(pushId,msgType);
+                }
+            },5000);
+        }
+
     }
 
 
@@ -471,7 +504,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentVideo=new Intent(Intent.ACTION_PICK,MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intentVideo,REQUEST_CODE_PICK_VIDEO);
                 break;
-
         }
     }
 

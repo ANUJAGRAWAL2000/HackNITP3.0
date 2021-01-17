@@ -39,6 +39,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabmain;
     private ViewPager vpmain;
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReferenceChats;
+    private DatabaseReference databaseReferenceChats,databaseReferenceMessages;
     private FirebaseUser firebaseUser;
     Intent callIntent;
     private String numberToCall = "8619921796";
@@ -228,7 +229,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             case R.id.menuLocation:
-
                 locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
                 locationListener = new LocationListener() {
                     @Override
@@ -238,8 +238,37 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                                 address += addresses.get(0).getAddressLine(0);
+
+
+                                databaseReferenceMessages=FirebaseDatabase.getInstance().getReference().child(Node.Messages);
+                                databaseReferenceMessages.child(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for(DataSnapshot ds:dataSnapshot.getChildren())
+                                        {
+                                            String UserId=ds.getKey();
+                                            String MsgId=databaseReferenceMessages.child(firebaseUser.getUid()).child(UserId).push().getKey();
+                                            String Message=address;
+                                            String MessageFrom=firebaseUser.getUid();
+                                            String time= ServerValue.TIMESTAMP.toString();
+
+                                            databaseReferenceMessages.child(firebaseUser.getUid()).child(UserId).child(MsgId).child(Node.Message).setValue(Message);
+                                            databaseReferenceMessages.child(firebaseUser.getUid()).child(UserId).child(MsgId).child(Node.MessageFrom).setValue(MessageFrom);
+                                            databaseReferenceMessages.child(firebaseUser.getUid()).child(UserId).child(MsgId).child(Node.MessageId).setValue(MsgId);
+                                            databaseReferenceMessages.child(firebaseUser.getUid()).child(UserId).child(MsgId).child(Node.MessageType).setValue("text");
+                                            databaseReferenceMessages.child(firebaseUser.getUid()).child(UserId).child(MsgId).child(Node.TIME_STAMP).setValue(time);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
                                 Log.i("Latitude", String.valueOf(location.getLatitude()));
                                 Log.i("Address!!!!!!", address);
+                                Log.i("ADDRESS",address);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -268,7 +297,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 50, locationListener);
                 }
-
                 default:
                 return super.onOptionsItemSelected(item);
         }

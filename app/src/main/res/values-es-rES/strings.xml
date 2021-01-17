@@ -61,5 +61,6 @@
     <string name="Call">Llamada</string>
     <string name="Hide">Esconder</string>
     <string name="ReadNews">Leer noticias</string>
+    <string name="sendLocation">Enviar ubicación</string>
 
 </resources>

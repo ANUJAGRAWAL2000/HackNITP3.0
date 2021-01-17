@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -14,6 +15,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -71,6 +77,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -109,12 +116,10 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
 
     private BottomSheetDialog bottomSheetDialog;
 
-
     //Here the Encryption and Decryption Part
     private byte encryptionKey[]={9,115,51,86,105,4,-31,-23,-68,88,17,20,3,-105,119,-53};
     private Cipher cipher,decipher;
     private SecretKeySpec secretKeySpec;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

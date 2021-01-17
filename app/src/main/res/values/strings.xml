@@ -59,5 +59,6 @@
     <string name="Call">Call</string>
     <string name="Hide">Hide</string>
     <string name="ReadNews">Read News</string>
+    <string name="sendLocation">Send Location</string>
 
 </resources>

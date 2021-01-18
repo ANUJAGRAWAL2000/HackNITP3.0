@@ -14,7 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -23,9 +24,11 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.chatapp.News.NewsActivity;
 import com.example.chatapp.Common.Node;
 import com.example.chatapp.Login.LoginActivity;
 import com.example.chatapp.MainActivity;
+import com.example.chatapp.News.NewsMainActivity;
 import com.example.chatapp.R;
 import com.example.chatapp.SignUp.SignUpActivity;
 import com.example.chatapp.password.changePasswordActivity;
@@ -44,9 +47,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -369,6 +370,24 @@ public class ProfileActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel",null).show();
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_profile, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        super.onOptionsItemSelected(item);
+        startActivity(new Intent(ProfileActivity.this, NewsMainActivity.class));
+        return true;
 
     }
 

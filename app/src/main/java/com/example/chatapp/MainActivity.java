@@ -10,8 +10,14 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +42,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,18 +54,35 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     Intent callIntent;
     private String numberToCall = "8619921796";
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    protected static String address = "";
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if(requestCode == 1) {
 
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                startActivity(callIntent);
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
 
+                    startActivity(callIntent);
+
+                }
+            }
+
+        } else if(requestCode == 2) {
+
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+               if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                   locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 50, locationListener);
+
+               }
             }
         }
 
@@ -158,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profile,menu);
@@ -203,7 +227,49 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 return true;
-            default:
+            case R.id.menuLocation:
+
+                locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                locationListener = new LocationListener() {
+                    @Override
+                    public void onLocationChanged(@NonNull Location location) {
+                        if (location != null) {
+                            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                            try {
+                                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                                address += addresses.get(0).getAddressLine(0);
+                                Log.i("Latitude", String.valueOf(location.getLatitude()));
+                                Log.i("Address!!!!!!", address);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else{
+                            Log.i("NULL", "IS NULL");
+                        }
+                    }
+
+                    @Override
+                    public void onProviderDisabled(@NonNull String provider) {
+
+                    }
+
+                    @Override
+                    public void onProviderEnabled(@NonNull String provider) {
+
+                    }
+
+                    @Override
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                    }
+                };
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 2);
+                } else {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 50, locationListener);
+                }
+
+                default:
                 return super.onOptionsItemSelected(item);
         }
     }

@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,9 +64,19 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 
@@ -77,6 +88,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvCustom,tvStatus;
     private String UserName,PhotoName;
 
+    private String Charset="ISO-8859-1";
     private LinearLayout llProgress;
     private SwipeRefreshLayout srl;
     private MessageAdapter messageAdapter;
@@ -96,6 +108,13 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_CODE_FORWARD_MESSAGE=104;
 
     private BottomSheetDialog bottomSheetDialog;
+
+
+    //Here the Encryption and Decryption Part
+    private byte encryptionKey[]={9,115,51,86,105,4,-31,-23,-68,88,17,20,3,-105,119,-53};
+    private Cipher cipher,decipher;
+    private SecretKeySpec secretKeySpec;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,6 +229,20 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 loadMessage();
             }
         });
+
+
+//          <----------Encryption Part----------->
+        try{
+            cipher = Cipher.getInstance("AES");
+            decipher=Cipher.getInstance("AES");
+        }catch(NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        }
+
+        secretKeySpec=new SecretKeySpec(encryptionKey,"AES");
+
 
 
 
@@ -347,11 +380,35 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         messageQuery.addChildEventListener(new ChildEventListener()
         {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s)
-            {
-                MessageModel messageModel=dataSnapshot.getValue(MessageModel.class);
-
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //It will Directly Convert that Info into MessageModel Format;
+                MessageModel messageModel = dataSnapshot.getValue(MessageModel.class);
+//                String stringMessage = messageModel.getMessage();
+//                String[] stringMessageArray = stringMessage.split(",");
+//                Arrays.sort(stringMessageArray);
+//                String[] stringFinal = new String[stringMessageArray.length*2];
+//
+//                try {
+//                for (int i = 0; i < stringMessageArray.length; i++)
+//                {
+//                        stringFinal[i]=AESDecryptionMethod(stringMessageArray[i]);
+//                    Log.i("DECRPTY",stringFinal[i]);
+//                }
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+
+
+                String MESSAGE= null;
+                try {
+                    Log.i("MESSAGE",messageModel.getMessage());
+                    MESSAGE = AESDecryptionMethod(messageModel.getMessage());
+                    Log.i("DECRYPT",MESSAGE);
+                    messageModel.setMessage(MESSAGE);
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 
                 messageModelList.add(messageModel);
                 messageAdapter.notifyDataSetChanged();
@@ -461,7 +518,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     DatabaseReference userMessage = FirebaseDatabase.getInstance().getReference().child(Node.Messages).child(currentUserId).child(chatUserId).push();
                     String pushId = userMessage.getKey();
-                    SendMessage(Message.getText().toString().trim(), Constants.MESSAGE_TYPE_TEXT, pushId);
+                    SendMessage(AESEncryptionMethod(Message.getText().toString().trim()), Constants.MESSAGE_TYPE_TEXT, pushId);
                 }
                 else
                 {
@@ -605,7 +662,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onSuccess(Uri uri) {
                             String downloadUri=uri.toString();
-                            SendMessage(downloadUri,message_type,pushId);
+                            SendMessage(AESEncryptionMethod(downloadUri),message_type,pushId);
                         }
                     });
                 }
@@ -700,7 +757,6 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(SendActivity.this,"You are not allowed to Edit other's Text",Toast.LENGTH_SHORT).show();
 
         Message.setText("");
-
     }
 
     public void Delete(String messageId,String messageType)
@@ -903,6 +959,52 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(I,REQUEST_CODE_FORWARD_MESSAGE);
     }
 
+    private String AESEncryptionMethod(String string)
+    {
+        byte[] stringByte=string.getBytes();
+        byte[] encryptedByte=new byte[stringByte.length];
+
+        try {
+            cipher.init(Cipher.ENCRYPT_MODE,secretKeySpec);
+            encryptedByte=cipher.doFinal(stringByte);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+
+        String returnString=null;
+        try {
+           returnString=new String(encryptedByte,Charset);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return returnString;
+    }
+
+
+    private String AESDecryptionMethod(String string) throws UnsupportedEncodingException {
+        byte[] EncryptedByte=string.getBytes(Charset);
+        String decryptedString=string;
+
+        byte[] decryption;
+
+        try {
+            decipher.init(cipher.DECRYPT_MODE,secretKeySpec);
+            decryption=decipher.doFinal(EncryptedByte);
+            decryptedString=new String(decryption);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        }
+
+        return decryptedString;
+    }
 
     @Override
     public void onBackPressed() {

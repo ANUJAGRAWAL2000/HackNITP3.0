@@ -964,7 +964,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(I,REQUEST_CODE_FORWARD_MESSAGE);
     }
 
-    private String AESEncryptionMethod(String string)
+    public String AESEncryptionMethod(String string)
     {
         byte[] stringByte=string.getBytes();
         byte[] encryptedByte=new byte[stringByte.length];
@@ -990,7 +990,7 @@ public class SendActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private String AESDecryptionMethod(String string) throws UnsupportedEncodingException {
+    public String AESDecryptionMethod(String string) throws UnsupportedEncodingException {
         byte[] EncryptedByte=string.getBytes(Charset);
         String decryptedString=string;
 

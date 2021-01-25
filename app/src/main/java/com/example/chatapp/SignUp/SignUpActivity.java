@@ -39,8 +39,8 @@ import java.util.HashMap;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TextInputEditText etName,etEmail,etPassword,etConfPass;
-    private String Email,Name,Password,ConfPassword;
+    private TextInputEditText etName,etEmail,etPassword,etConfPass,etNumber;
+    private String Email,Name,Password,ConfPassword,Number;
 
     private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
@@ -117,6 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         hashMap.put(Node.Name,etName.getText().toString().trim());
                                         hashMap.put(Node.Email,etEmail.getText().toString().trim());
                                         hashMap.put(Node.Photo,ServerFileUri.getPath());
+                                        hashMap.put(Node.Number,Number);
                                         hashMap.put(Node.Online,"true");
 
                                         databaseReference.child(UserID).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -170,6 +171,7 @@ public class SignUpActivity extends AppCompatActivity {
                     hashMap.put(Node.Name,etName.getText().toString().trim());
                     hashMap.put(Node.Email,etEmail.getText().toString().trim());
                     hashMap.put(Node.Photo,"");
+                    hashMap.put(Node.Number,Number);
                     hashMap.put(Node.Online,"true");
 
                     databaseReference.child(UserID).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -211,6 +213,7 @@ public class SignUpActivity extends AppCompatActivity {
         etEmail=(TextInputEditText)findViewById(R.id.etEmail);
         etPassword=(TextInputEditText)findViewById(R.id.etPassword);
         etConfPass=(TextInputEditText)findViewById(R.id.etConfPassword);
+        etNumber=(TextInputEditText)findViewById(R.id.etNumber);
         ivProfile=findViewById(R.id.Profile);
     }
 
@@ -220,7 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
         Name=etName.getText().toString().trim();
         Password=etPassword.getText().toString().trim();
         ConfPassword=etConfPass.getText().toString().trim();
-
+        Number=etNumber.getText().toString().trim();
 
         if(Email.equals(""))
         {
@@ -245,6 +248,10 @@ public class SignUpActivity extends AppCompatActivity {
         else if(!Password.equals(ConfPassword))
         {
             etConfPass.setError(getString(R.string.PasswordMismatch));
+        }
+        else if(Number.equals("") || Number.length()!=10)
+        {
+            etNumber.setError(getString(R.string.EnterValidNumber));
         }
         else
             {

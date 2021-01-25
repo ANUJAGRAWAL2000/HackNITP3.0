@@ -10,6 +10,7 @@ public class Node {
     public static final String Online="online";
     public static final String Photo="photo";
     public static final String Email="email";
+    public static final String Number="number";
     public static final String TYPING = "typing";
 
     public static final String Friend_Requests="friend_request";

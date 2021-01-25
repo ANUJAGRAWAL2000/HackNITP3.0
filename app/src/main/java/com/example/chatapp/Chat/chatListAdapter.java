@@ -34,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatListViewHolder> {
@@ -41,7 +42,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
     private Context context;
     private List<ChatListModel> chatListModelList;
     private View ChatToHide;
-    private DatabaseReference databaseReferenceChats;
+    private DatabaseReference databaseReferenceChats,databaseReferenceUsers;
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
 
@@ -74,6 +75,13 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
 
         if(!chatListModel.getLastMessage().equals("")) {
             String LastMessage=chatListModel.getLastMessage();
+            if(context instanceof SendActivity) {
+                try {
+                    LastMessage = ((SendActivity) context).AESDecryptionMethod(LastMessage);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
             LastMessage=LastMessage.length()>30?LastMessage.substring(0,30):LastMessage;
             holder.tvLastMessage.setText(LastMessage);
         }
@@ -121,6 +129,15 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
                 return true;
             }
         });
+
+        holder.ivCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String MobileNumber=databaseReferenceUsers.child(firebaseUser.getUid()).child(Node.Number).getKey()!=null?
+                        databaseReferenceUsers.child(firebaseUser.getUid()).child(Node.Number).getKey():" ";
+                Log.d("MobileNumber",MobileNumber);
+            }
+        });
     }
 
     @Override
@@ -132,7 +149,7 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
     public class ChatListViewHolder extends RecyclerView.ViewHolder{
         private LinearLayout llChatList;
         private TextView fullName,tvLastMessage,tvUnReadCount,tvLastMessageTime;
-        private ImageView ivProfile;
+        private ImageView ivProfile,ivCall;
         public ChatListViewHolder(@NonNull View itemView) {
             super(itemView);
             llChatList=itemView.findViewById(R.id.llChatList);
@@ -141,7 +158,9 @@ public class chatListAdapter extends RecyclerView.Adapter<chatListAdapter.ChatLi
             tvUnReadCount=itemView.findViewById(R.id.tvUnreadCount);
             tvLastMessageTime=itemView.findViewById(R.id.tvLastMessageTime);
             ivProfile=itemView.findViewById(R.id.ivProfile);
+            ivCall=itemView.findViewById(R.id.ivCall);
             databaseReferenceChats= FirebaseDatabase.getInstance().getReference().child(Node.Chats);
+            databaseReferenceUsers=FirebaseDatabase.getInstance().getReference().child(Node.Users);
             mAuth=FirebaseAuth.getInstance();
             firebaseUser=mAuth.getCurrentUser();
         }

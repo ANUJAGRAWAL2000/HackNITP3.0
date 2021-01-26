@@ -86,6 +86,15 @@
                 android:textColor="@color/black"
                 tools:text="09:00" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivCall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_call_24"
+            app:srcCompat="@drawable/ic_baseline_call_24" />
+
     </LinearLayout>
 
     <View

@@ -60,5 +60,7 @@
     <string name="Hide">Hide</string>
     <string name="ReadNews">Read News</string>
     <string name="sendLocation">Send Location</string>
+    <string name="etNumber">Enter Number</string>
+    <string name="EnterValidNumber">Enter Valid Number</string>
 
 </resources>

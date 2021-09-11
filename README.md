@@ -1,12 +1,47 @@
-# HackNITP3.0
-This repository contains all the code of our Android App.
-This App has:SignUp,SignIn,Email Verification,Multi Language Features,Multimedia Transfer,
-Hide Chats,Disappearing Messages,"Forward,Delete,Share,Download" Chats,EditText also Included,
-We are Storing data in Encrypted manner in our Firebasedatabase and decrypting at Client Side;
 
-The Link of the Drive where we have Uploaded the Video,Presentation and HandBook also:
-https://drive.google.com/drive/folders/10wwdlgY3kWGjBGjjMcSXfmy1Uwco-KZ9?usp=sharing
+# ChatApp
 
-SetUp Requirement: Android Studio required,Emulator or Physical Device.
+This is the very First Android Application that I built in the starting of my Android Journey. This App is developed in Java, XML and Firebase. 
+It uses some other Android libraries such as glide. 
+I used Firebase Database, Storage and Authentication for all the backend Part.
+## Features
 
-APK File of Our App:Has Uploaded In The Drive(HACKNITP_ALPHA_CODERS-->).
+- Authentication
+    - SignIn and SignUp
+    - Reset Password
+    - Forgot Password
+    - Email Verification
+
+- Messaging
+    - Send and Receive messages with users
+    - Send pictures
+
+- Friends
+    - Accept or Remove Friends
+
+- Requests
+    - Send or Cancel Friend Request to users
+
+- Profile
+    - Update your Profile Picture
+    - Update the Info
+
+- Multi Language Supported
+     - Hindi
+     - English
+
+- Hide Messages
+- Encryption of Text Messages
+## Demo
+
+The Link of the Drive where I have Uploaded the demo Video of this App: https://drive.google.com/drive/folders/10wwdlgY3kWGjBGjjMcSXfmy1Uwco-KZ9?usp=sharing
+
+  
+## Installation
+
+Setting up Project
+
+- Download Project
+- Create a new Firebase Project in console
+- Connect project with Firebase (Tools/Firebase) in Android Studio
+- Generate, download, paste google-services.json into the project

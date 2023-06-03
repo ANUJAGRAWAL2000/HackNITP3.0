@@ -85,6 +85,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 
 public class SendActivity extends AppCompatActivity implements View.OnClickListener {
